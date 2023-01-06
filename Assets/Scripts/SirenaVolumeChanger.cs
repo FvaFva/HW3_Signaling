@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class SirenaVolumeController : MonoBehaviour
+public class SirenaVolumeChanger : MonoBehaviour
 {
     [SerializeField] private float _volumeChangeStep;
 
