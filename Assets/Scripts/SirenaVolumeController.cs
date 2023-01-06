@@ -18,22 +18,19 @@ public class SirenaVolumeController : MonoBehaviour
             _volumeChangeStep = 0.1f;
     }
 
-    public void SetVolume(bool isInfiltrated)
+    public void SetVolume(float targetVolume)
     {
         if(_volumeChange != null)
             StopCoroutine(_volumeChange);
 
-        if (isInfiltrated)
-            _volumeChange = StartCoroutine(MoveVolume(1));
-        else
-            _volumeChange = StartCoroutine(MoveVolume(0));
+        _volumeChange = StartCoroutine(MoveVolume(targetVolume));
     }
 
     private IEnumerator MoveVolume(float targetVolume)
     {
         while(_sirena.volume != targetVolume)
         {
-            _sirena.volume = Mathf.MoveTowards(_sirena.volume, targetVolume, _volumeChangeStep);
+            _sirena.volume = Mathf.MoveTowards(_sirena.volume, targetVolume, _volumeChangeStep * Time.deltaTime);
             yield return null;
         }
     }
